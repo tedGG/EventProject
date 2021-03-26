@@ -13,7 +13,6 @@ export default class NavigationBar extends Component {
                   </Link>
                  <Navbar.Brand href="/">EventEveryday</Navbar.Brand>
                  <Nav className="mr-auto">
-                    <Link to={"add"} className="nav-link">User</Link>
                     <Link to={"users"} className="nav-link">User List</Link>
                     <Link to={"createEvent"} className="nav-link">Create event</Link>
                  </Nav>  
