@@ -1,22 +1,18 @@
 import React,{Component} from 'react'
-import {Card,Form,Button,Col,Row} from 'react-bootstrap'
+import {Card,Form,Button,Col} from 'react-bootstrap'
 import axios from 'axios'
-import MyToast from './MyToast'
+import {withRouter} from 'react-router-dom';
 
-
-export default class Registration extends Component{
-
-    
+ class Registration extends Component{
     constructor(props){
         super(props);
         this.state = this.initialState;
-        this.state.show = false;
         this.userChange = this.userChange.bind(this);
         this.submitUser = this.submitUser.bind(this);
     }
 
     initialState = {
-        id:0,username:'',password:'',passwordConfirm:'',email:''
+        username:'',password:'',passwordConfirm:'',email:''
     }
     submitUser = event =>{
         event.preventDefault();
@@ -27,13 +23,13 @@ export default class Registration extends Component{
             email: this.state.email
         }
 
-        axios.post("http://localhost:8080/registration/addUser",user)
+        axios.post("http://localhost:8080/api/auth/signup",user)
         .then(response=>{
             if(response.data !=null){
-                this.setState({"show":true});  
-                setTimeout(() => this.setState({"show" : false}),3000); 
+               alert("success!")
+               return this.props.history.push('/login');
             }else {
-                this.setState({"show":false});   
+                return this.props.history.push('/login');  
             }
         })
 
@@ -51,19 +47,14 @@ export default class Registration extends Component{
     render(){
         const {username,password,passwordConfirm,email} = this.state;
 
-       
         return (
+            
 
-            <div>
-                {/* <div style={{"display" : this.state.show ? "block" : "none"}}>
-                    <MyToast children={{show:this.state.show, message:"User saved successfully!"}} />
-                </div> */}
-                <Row className="justify-content-md-center">
                 <Card>
                 <Card.Header>Registration</Card.Header>
                 <Form onReset={this.resetUser} onSubmit={this.submitUser} id="userFormId">
                 <Card.Body>
-                    <Form.Label>
+                    <Form>
                         <Form.Group as={Col} controlId="formGridUsername">
                             <Form.Label>Enter username</Form.Label>
                             <Form.Control  required autoComplete="off"
@@ -73,7 +64,7 @@ export default class Registration extends Component{
                              onChange={this.userChange}
                              placeholder="Enter username" />
                         </Form.Group>
-                    
+
                         <Form.Group as={Col} controlId="formGridPassword">
                             <Form.Label>Enter password</Form.Label>
                             <Form.Control required required autoComplete="off"
@@ -104,23 +95,21 @@ export default class Registration extends Component{
                             placeholder="Enter email" />
                         </Form.Group>
 
-                    </Form.Label>
+                    </Form>
                     </Card.Body>
                     <Card.Footer style={{"textAlign" : "right"}}>
                     <Button size="sm" variant="success" type="submit">
                         Submit
-                    </Button>{' '}
-                    <Button size="sm" variant="info" type="reset">
-                        Reset
                     </Button>
+                   
                     </Card.Footer>
             
                     </Form>
              
             </Card>
-            </Row>
-            </div>
+            
         )
     }
 }
 
+export default withRouter(Registration)

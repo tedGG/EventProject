@@ -1,10 +1,6 @@
 import axios from 'axios';
 import React,{Component} from 'react'
-import {connect} from 'react-redux'
-
-import {Card,Table,Image,ButtonGroup,Button,Alert} from 'react-bootstrap'
-import User from './Registration';
-
+import {Card,Table,Image,ButtonGroup,Button} from 'react-bootstrap'
 
 
 export default class UserList extends Component{
@@ -18,7 +14,8 @@ export default class UserList extends Component{
     }
 
     componentDidMount(){        
-    this.findAllUsers();
+        this.findAllUsers();
+        
     }
 
     findAllUsers(){
@@ -40,13 +37,7 @@ export default class UserList extends Component{
     }
 
     render(){
-
-    
         return(
-
-            <div>
-           
-                    
             <Card className="border border-primary bg-light text-dark">
             <Card.Header>User List</Card.Header>
             <Card.Body>
@@ -78,7 +69,7 @@ export default class UserList extends Component{
                                         <td>
                                             <ButtonGroup>
                                                 <Button size="sm" variant="outline-primary">Edit</Button>
-                                                <Button size="sm" variant="outline-danger" onClick={this.deleteUser.bind(this,user.id)}>Delete</Button>
+                                                <Button size="sm" variant="outline-danger" onClick={this.deleteUser.bind(this,user.idEvent)}>Delete</Button>
                                             </ButtonGroup>
                                         </td>
                                     </tr>
@@ -88,9 +79,6 @@ export default class UserList extends Component{
                             </Table>
             </Card.Body>
         </Card> 
-            
-
-        </div>
         );
     }
 }

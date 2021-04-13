@@ -18,7 +18,10 @@ public class LikedPosts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_event;
+    private Long IdEvent;
+
+    @Lob
+    private byte[] selectedFile;
 
     private String description;
 

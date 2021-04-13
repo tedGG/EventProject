@@ -1,46 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
-import {Provider} from 'react-redux'
 import NavigationBar from './components/NavigationBar';
-import { Container, Row, Col } from 'react-bootstrap';
-import Welcome from './components/Welcome';
+import {Image, Container, Row, Col, Navbar } from 'react-bootstrap';
 import Footer from './components/Footer';
+import LikedEvents from './components/LikedEvents'
 import UserList from './components/UserList';
-import User from './components/Registration';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import EventList from './components/EventList';
 import Event from './components/Event'
-
-
+import CaroselImage from './components/CaroselImage';
+import Signin from './components/Signin';
+import "./App.css"
+import Showcase from './components/Showcase';
+import {Link} from 'react-scroll'
+import { Header } from 'semantic-ui-react';
 
 function App() {
   
- 
 
 const marginTop = {
   marginTop:"20px"
 };
 
   return (
+
     <Router>
-      <NavigationBar/>
-      <Container>
-        <Row>
+        <NavigationBar />
+        <div className="main"><Showcase/></div>
+        <Container>
+        <Row>   
           <Col lg={12} style={marginTop}>
-            {/* //()=><Provider store={store}><UserList/></Provider> */}
             <Switch>
               <Route path="/" exact component={EventList}/>
+              {/* <Route path="/events" exact component={EventList}/> */}
+              <Route path="/likedevents" exact component={LikedEvents}/>
               <Route path="/users" exact component={UserList}/>
               <Route path="/createEvent" exact component={Event}/>
               <Route path="/registration" exact component={Registration}/>
-              <Route path="/login" exact component={Login}/>
+              <Route path="/login" exact component={Signin}/>
             </Switch>
           </Col>
         </Row>
       </Container>
-      <Footer/>
+      {/* <Footer/> */}
     </Router>
   );
 }

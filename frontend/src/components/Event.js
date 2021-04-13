@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Card,Form,Button,Col, ThemeProvider} from 'react-bootstrap'
+import {Card,Form,Button,Col, Image} from 'react-bootstrap'
 import axios from 'axios'
 
 export default class Event extends Component{
@@ -26,6 +26,7 @@ export default class Event extends Component{
         console.log(element);
         var reader = new FileReader();
         let file = element.target.files[0];
+
         reader.onload = (e) => {
           var arrayBuffer = e.target.result;
           var blob = new Blob([arrayBuffer], { type: file.type });
@@ -34,6 +35,8 @@ export default class Event extends Component{
             });
         }
         reader.readAsArrayBuffer(file);
+        
+        
         
     }
 
@@ -63,8 +66,6 @@ export default class Event extends Component{
         .then(res=> {
             console.log(res.data)
         });
-
-
         
         this.setState(this.initialState)
     };
@@ -93,6 +94,8 @@ export default class Event extends Component{
         const {date,location,nameEvent,description,organizer,type_event} = this.state;
         
         
+        console.log("blob" + this.state.selectedFile)
+
       
         return(
         <div>
@@ -102,6 +105,7 @@ export default class Event extends Component{
                 <Card.Body>
                     <Form.Row>
                         <Form.Group>
+                            <Image  width="50" height="50"></Image>
                             <Form.File onChange={this.upload} multiple id="exampleFormControlFile1" label="Example file input" />
                         </Form.Group>
 
@@ -171,13 +175,12 @@ export default class Event extends Component{
                     <Card.Footer style={{"textAlign" : "right"}}>
                     <Button size="sm" variant="success" type="submit">
                         Submit
-                    </Button>
+                    </Button>{'  '}
                     <Button size="sm" variant="info" type="reset">
                         Reset
                     </Button>
                     </Card.Footer>
-            console.log(this.state.event);
-            </Form>
+                </Form>
                     
             </Card>
             

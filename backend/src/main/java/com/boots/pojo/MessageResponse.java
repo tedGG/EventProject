@@ -1,9 +1,10 @@
-package com.boots.Response;
+package com.boots.pojo;
 
-public class ResponseMessage {
+public class MessageResponse {
+
     private String message;
 
-    public ResponseMessage(String message) {
+    public MessageResponse(String message) {
         this.message = message;
     }
 

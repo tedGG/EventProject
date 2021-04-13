@@ -14,13 +14,7 @@ import java.util.List;
 public class RegistrationController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserService userService;
-
-
-
 
     @GetMapping("/users")
     public List<User> getUsers(){
@@ -37,4 +31,5 @@ public class RegistrationController {
         userService.saveUser(user);
         return user;
     }
+
 }
